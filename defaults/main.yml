@@ -63,6 +63,7 @@ rabbitmq_redhat_version: 3.6.1
 rabbitmq_extra_vhosts: []
 # - name: /
 #   state: present
+#   node: "rabbit"
 
 # Define admin user to create in order to login to WebUI
 rabbitmq_users:
@@ -77,3 +78,4 @@ rabbitmq_users:
     # required for management plugin.
     # https://www.rabbitmq.com/management.html
     tags: administrator
+    # node: "rabbit"
