@@ -78,6 +78,7 @@ rabbitmq_redhat_version: 3.8.11
 rabbitmq_extra_vhosts: []
 # - name: /
 #   state: present
+#   node: "rabbit"
 
 # Define admin user to create in order to login to WebUI
 rabbitmq_users:

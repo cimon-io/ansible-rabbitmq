@@ -10,6 +10,7 @@
     tags: "{{ item['tags']|default(omit) }}"
     permissions: "{{ item['permissions']|default(omit) }}"
     state: present
+    node: "{{ item['node'] | default('rabbit') }}"
   become: true
   loop: "{{ rabbitmq_users }}"
   loop_control:
@@ -30,6 +31,7 @@
     tags: "{{ item['tags']|default(omit) }}"
     permissions: "{{ item['permissions']|default(omit) }}"
     state: present
+    node: "{{ item['node'] | default('rabbit') }}"
   run_once: yes
   delegate_to: "{{ rabbitmq_master }}"
   become: true
