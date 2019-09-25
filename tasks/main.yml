@@ -2,40 +2,69 @@
 # tasks file for ansible-rabbitmq
 - include: debian.yml
   when: ansible_os_family == "Debian"
+  tags:
+    - rabbitmq
+    - rabbitmq_install
 
 - include: redhat.yml
   when: >
         ansible_distribution == "CentOS" or
         ansible_distribution == "Red Hat Enterprise Linux" or
         ansible_distribution == "OracleLinux"
+  tags:
+    - rabbitmq
+    - rabbitmq_install
 
 - include: fedora.yml
   when: ansible_distribution == "Fedora"
+  tags:
+    - rabbitmq
+    - rabbitmq_install
 
 - include: rabbitmq_plugins.yml
   when: rabbitmq_plugins is defined
 
 - include: config.yml
   when: rabbitmq_config_service
+  tags:
+    - rabbitmq
+    - rabbitmq_config
 
 - name: checking to see if already clustered
   stat:
     path: /etc/rabbitmq/clustered
   become: true
   register: clustered
+  tags:
+    - rabbitmq
+    - rabbitmq_config
 
 - include: rabbitmq_clustering.yml
   when: >
         rabbitmq_enable_clustering and
         not clustered['stat']['exists']
+  tags:
+    - rabbitmq
+    - rabbitmq_cluster
+    - rabbitmq_config
 
 - include: rabbitmq_vhosts.yml
   when: rabbitmq_extra_vhosts is defined
+  tags:
+    - rabbitmq
+    - rabbitmq_vhosts
 
 - include: rabbitmq_config.yml
   when: >
         rabbitmq_enable_clustering and
         rabbitmq_config is defined
+  tags:
+    - rabbitmq
+    - rabbitmq_config
+    - rabbitmq_ha
 
 - include: rabbitmq_users.yml
   when: rabbitmq_users is defined
+  tags:
+    - rabbitmq
+    - rabbitmq_users
