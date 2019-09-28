@@ -68,3 +68,9 @@
   tags:
     - rabbitmq
     - rabbitmq_users
+
+- include: rabbitmq_plugins.yml
+  when: rabbitmq_plugins | length > 0
+  tags:
+    - rabbitmq
+    - rabbitmq_plugins

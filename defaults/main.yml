@@ -24,6 +24,7 @@ rabbitmq_config_ha: false
 rabbitmq_config_service: false
 rabbitmq_config_file: etc/rabbitmq/rabbitmq.config.j2
 rabbitmq_config_env_file: etc/rabbitmq/rabbitmq-env.conf.j2
+rabbitmq_plugin_dir: "/usr/lib/rabbitmq/plugins"
 rabbitmq_env_config: {}
 
 # rabbitmq_debian_repo: deb http://www.rabbitmq.com/debian/ testing main
@@ -93,6 +94,9 @@ rabbitmq_users:
     # required for management plugin.
     # https://www.rabbitmq.com/management.html
     tags: administrator
+    # node: "rabbit"
 
-# comma separated list of plugins to enable
-rabbitmq_plugins: "rabbitmq_management"
+rabbitmq_plugins: []
+# - name: ""
+#   url: ""
+#   extract: true
