@@ -2,9 +2,9 @@
 - name: create plugin directory
   file:
     path: "{{ rabbitmq_plugin_dir }}"
-    owner: "root"
-    group: "root"
-    mode: "0750"
+    owner: rabbitmq
+    group: rabbitmq
+    mode: "0755"
     state: directory
   become: true
 
@@ -12,6 +12,8 @@
   get_url:
     url: "{{ item.url }}"
     dest: "{{ rabbitmq_plugin_dir }}"
+    owner: rabbitmq
+    group: rabbitmq
     mode: "0640"
   become: true
   with_items: "{{ rabbitmq_plugins }}"
@@ -21,6 +23,8 @@
   unarchive:
     src: "{{ item.url }}"
     dest: "{{ rabbitmq_plugin_dir }}"
+    owner: rabbitmq
+    group: rabbitmq
     mode: "0640"
   become: true
   with_items: "{{ rabbitmq_plugins }}"
