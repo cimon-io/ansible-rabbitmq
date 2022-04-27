@@ -12,7 +12,9 @@
     state: present
     node: "{{ item['node'] | default('rabbit') }}"
   become: true
-  with_items: "{{ rabbitmq_users }}"
+  loop: "{{ rabbitmq_users }}"
+  loop_control:
+    label: "{{ item.name }}"
   when: >
         (rabbitmq_enable_clustering is defined and
           not rabbitmq_enable_clustering) or
@@ -33,7 +35,9 @@
   run_once: yes
   delegate_to: "{{ rabbitmq_master }}"
   become: true
-  with_items: "{{ rabbitmq_users }}"
+  loop: "{{ rabbitmq_users }}"
+  loop_control:
+    label: "{{ item.name }}"
   when: >
         rabbitmq_enable_clustering is defined and
           rabbitmq_enable_clustering

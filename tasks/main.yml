@@ -51,9 +51,8 @@
     - rabbitmq
     - rabbitmq_vhosts
 
-- include: rabbitmq_ha_config.yml
+- include: rabbitmq_config.yml
   when: >
-        rabbitmq_config_ha and
         rabbitmq_enable_clustering and
         rabbitmq_config is defined
   tags:
