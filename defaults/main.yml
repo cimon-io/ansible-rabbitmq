@@ -29,14 +29,13 @@ rabbitmq_env_config: {}
 
 # rabbitmq_debian_repo: deb http://www.rabbitmq.com/debian/ testing main
 #other repos
-rabbitmq_debian_repo: "deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/debian {{ ansible_distribution_release }} main"
+rabbitmq_debian_repo: "deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} main"
 rabbitmq_debian_repo_key: "https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/gpg.9F4587F226208342.key"
-rabbitmq_debian_team_key: "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+rabbitmq_debian_team_key: "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA"
 
 rabbitmq_debian_erlang_from_rabbit: true
-rabbitmq_debian_erlang_repo: "deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/debian {{ ansible_distribution_release }} main"
+rabbitmq_debian_erlang_repo: "deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} main"
 rabbitmq_debian_erlang_repo_key: "https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/gpg.E495BB49CC4BBE5B.key"
-
 
 # current version if not defined
 rabbitmq_debian_version_defined: true

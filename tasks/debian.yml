@@ -20,8 +20,7 @@
 
 - name: debian | adding RabbitMQ team public GPG key to the apt repo
   apt_key:
-    keyserver: keys.openpgp.org
-    id: "{{ rabbitmq_debian_team_key }}"
+    url: "{{ rabbitmq_debian_team_key }}"
     state: present
   become: true
   register: result
@@ -49,6 +48,15 @@
     state: present
   become: true
   when: rabbitmq_debian_erlang_from_rabbit
+
+- name: debian | installing Erlang
+  apt:
+    name: "{{ rabbitmq_erlang_packages }}"
+    state: present
+    update_cache: true
+  become: true
+  register: result
+  until: result is successful
 
 - name: debian | installing RabbitMQ server
   apt:
