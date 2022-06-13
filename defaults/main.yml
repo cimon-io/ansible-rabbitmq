@@ -99,3 +99,7 @@ rabbitmq_plugins: []
 # - name: ""
 #   url: ""
 #   extract: true
+
+rabbitmq_additional_conf_files: []
+# - src: files/rabbitmq/01-auth.conf
+#   dest: 01-auth.conf

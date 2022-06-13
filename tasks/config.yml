@@ -14,3 +14,23 @@
     mode: u=rw,g=r,o=r
   become: true
   notify: "restart rabbitmq-server"
+
+- name: create conf.d directory
+  file:
+    path: "/etc/rabbitmq/conf.d"
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+    state: directory
+  become: true
+
+- name: copy additional config files
+  copy:
+    src: "{{ item['src'] }}"
+    dest: "/etc/rabbitmq/conf.d/{{ item['dest'] }}"
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  become: true
+  with_items: "{{ rabbitmq_additional_conf_files }}"
+  notify: "restart rabbitmq-server"

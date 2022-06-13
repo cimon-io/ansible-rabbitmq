@@ -17,7 +17,9 @@
     mode: "0640"
   become: true
   with_items: "{{ rabbitmq_plugins }}"
-  when: not item.extract | default(True) | bool
+  when:
+  - not item.extract | default(True) | bool
+  - item.url is defined
 
 - name: download and extract plugins
   unarchive:
@@ -28,11 +30,14 @@
     mode: "0640"
   become: true
   with_items: "{{ rabbitmq_plugins }}"
-  when: item.extract | default(True) | bool
+  when:
+  - item.extract | default(True) | bool
+  - item.url is defined
 
 - name: enable rabbitmq plugins
   rabbitmq_plugin:
     names: "{{ item.name }}"
     state: enabled
+    new_only: "true"
   become: true
   with_items: "{{ rabbitmq_plugins }}"
